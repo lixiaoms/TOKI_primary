@@ -1,6 +1,6 @@
 args<-commandArgs(T)
 hic<-as.matrix(read.table(args[1]))
-max_inter<-ceiling(1200/as.numeric(args[2]))
+max_inter<-2*ceiling(600/as.numeric(args[2]))
 centro<-as.numeric(strsplit(args[3],',')[[1]])
 ncore<-as.numeric(args[4])
 outdir<-args[5]
@@ -16,8 +16,7 @@ a=length(which(W[col(W)==row(W)+1]>0))/(ncol(W)-1)
 for (i in 1:(ncol(W)-1)){
                         D[i+1,i]=min(1/a,D[i+1,i])
                        D[i,i+1]=min(1/a,D[i,i+1])}
-for (k in 1:ncol(W)){for (i in max(k-max_inter,1):min(k+max_inter,ncol(W))){for (j in max(k-30,1):min(k+30,ncol(W))){D[i,j]=min(D[i,j],D[i,k]+D[j,k])
-                                                            D[i,j]=min(D[i,j],D[i,k]+D[j,k])}}}
+for (k in 1:ncol(W)){for (i in max(k-max_inter,1):min(k+max_inter,ncol(W))){for (j in max(k-max_inter,1):min(k+max_inter,ncol(W))){D[i,j]=min(D[i,j],D[i,k]+D[j,k])}}}
 A=1/D
 for (i in 1:ncol(W)){A[i,i]=W[i,i]}
 return(A)}
@@ -36,8 +35,7 @@ system.time(
   D1 <- foreach(i=1:ncore,.combine='cbind') %dopar%
   { 
      res=D[((i-1)*(size-max_inter)+1):min((i-1)*(size-max_inter)+size,ncol(W)),((i-1)*(size-max_inter)+1):min((i-1)*(size-max_inter)+size,ncol(W))]
-     for (k in (1:ncol(res))){for (i in max(k-max_inter,1):min(k+max_inter,ncol(res))){for (j in max(k-max_inter,1):min(k+max_inter,ncol(res))){res[i,j]=min(res[i,j],res[i,k]+res[j,k])
-                                                            res[i,j]=min(res[i,j],res[i,k]+res[j,k])}}}
+     for (k in (1:ncol(res))){for (i in max(k-max_inter,1):min(k+max_inter,ncol(res))){for (j in max(k-max_inter,1):min(k+max_inter,ncol(res))){res[i,j]=min(res[i,j],res[i,k]+res[j,k])}}}
      res=rbind(res,matrix(0,nrow=size-nrow(res),ncol=ncol(res)))
   res
   }
