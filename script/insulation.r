@@ -55,7 +55,7 @@ valley=function(x,y,delta=3){
     return(pos)}
 
 TOKI=function(S,A,M,E){
-    ref=18+valley(IS(S),IS_delta(S))
+    ref=3+max_inter+valley(IS(S),IS_delta(S))
     t=sum(sum(S))
     s=1
     l=1
@@ -71,7 +71,7 @@ TOKI=function(S,A,M,E){
     E=E*s/(e*t)
     auc=0
     for (j in c(1/3,1/2,1,2,3)){for (k in c(1/3,1/2,1,2,3)){
-        auc1=AUC(1:ncol(S),ref,18+valley(IS(A*l/(m+e)+j*M+k*E),IS_delta(A*l/(m+e)+j*M+k*E)))
+        auc1=AUC(1:ncol(S),ref,3+max_inter+valley(IS(A*l/(m+e)+j*M+k*E),IS_delta(A*l/(m+e)+j*M+k*E)))
     if (auc1 > auc){
         b=j
         c=k
@@ -84,7 +84,7 @@ TOKI=function(S,A,M,E){
         possi[i,i+j]=max(0,(possi[i,i+j]-t*(S[i,i+j]/t-possi[i,i+j])**2+((possi[i,i+j]-t*(S[i,i+j]/t-possi[i,i+j])**2)**2+4*S[i,i+j]*(S[i,i+j]/t-possi[i,i+j])**2)**(1/2))/2)
     }}
     possi[lower.tri(possi)]=t(possi)[lower.tri(t(possi))]
-    return(18+valley(IS(possi),IS_delta(possi)))
+    return(3+max_inter+valley(IS(possi),IS_delta(possi)))
 }
 
 TAD=c()
