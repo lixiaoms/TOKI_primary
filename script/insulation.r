@@ -56,6 +56,7 @@ valley=function(x,y,delta=3){
 
 TOKI=function(S,A,M,E){
     ref=3+max_inter+valley(IS(S),IS_delta(S))
+    if (length(ref)==0){return(c())}
     t=sum(sum(S))
     s=1
     l=1
