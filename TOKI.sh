@@ -71,7 +71,7 @@ fi
 
 if [ ! -d "$o" ]
 then
-  mkdir "$o"
+  mkdir -p "$o"
 fi
 
 

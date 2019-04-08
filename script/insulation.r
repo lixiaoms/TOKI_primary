@@ -99,6 +99,6 @@ if (centro[2]<length){
     TAD=c(TAD,centro[2]+1,centro[2]+TOKI(hic[(centro[2]+1):length,(centro[2]+1):length],floyd[(centro[2]+1):length,(centro[2]+1):length],ctcf[(centro[2]+1):length,(centro[2]+1):length],exp[(centro[2]+1):length,(centro[2]+1):length]))
     }
 
-write.table(TAD,paste0(outdir,'/TAD'),row.names=F,col.names=F)
+write.table(TAD,paste0(outdir,'/TAD'),row.names=FALSE,col.names=FALSE)
 
 1

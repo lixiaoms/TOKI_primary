@@ -39,6 +39,6 @@ if (centro[2]<length){
     ctcf[(centro[2]+1):length,(centro[2]+1):length]=M[(centro[2]+1):length,(centro[2]+1):length]
     }
 
-write.table(ctcf,paste0(outdir,'/motif_matrix'),row.names=F,col.names=F)
+write.table(ctcf,paste0(outdir,'/motif_matrix'),row.names=FALSE,col.names=FALSE)
 
 1

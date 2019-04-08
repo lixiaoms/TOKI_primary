@@ -70,7 +70,7 @@ if (centro[2]<ncol(hic)){
     hic[(centro[2]+1):ncol(hic),(centro[2]+1):ncol(hic)]=Floyd(W2,ncore,max_inter)
     }
 
-write.table(hic,paste0(outdir,'/distance_matrix'),row.names=F,col.names=F)
+write.table(hic,paste0(outdir,'/distance_matrix'),row.names=FALSE,col.names=FALSE)
 
 1
     
